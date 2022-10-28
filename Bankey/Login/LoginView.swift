@@ -55,7 +55,7 @@ extension LoginView{
         dividerView.translatesAutoresizingMaskIntoConstraints = false
         dividerView.backgroundColor = .secondarySystemFill
         
-        layer.cornerRadius = 5
+        layer.cornerRadius = 5 // CA (Core Animation) Layer
         clipsToBounds = true // clip or exclude any other background images from it and just clip it around that
         
     }
