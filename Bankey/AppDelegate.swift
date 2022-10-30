@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .systemBackground
         
         loginViewController.delegate = self
+        onboardingContainerViewController.delegate = self
 //        window?.rootViewController = loginViewController
         window?.rootViewController = onboardingContainerViewController
         
@@ -33,6 +34,14 @@ extension AppDelegate: LoginViewControllerDelegate{
     func didLogin() {
         print("Did Login")
     }
+}
+
+extension AppDelegate: OnboardingContainerViewControllerDelegate{
+    func didFinishOnboarding() {
+        print("Did finish onboarding")
+    }
+    
+
 }
 
 
