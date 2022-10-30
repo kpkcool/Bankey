@@ -30,12 +30,14 @@ class LoginViewController: UIViewController {
     }
 }
 
+//MARK: - Style & Layouts
 extension LoginViewController{
+    
     private func style(){
         
         headingLabel.translatesAutoresizingMaskIntoConstraints = false
         headingLabel.text = "Bankey"
-        
+        headingLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         
         loginView.translatesAutoresizingMaskIntoConstraints = false
         
