@@ -15,8 +15,19 @@ class OnboardingContainerViewController: UIViewController{
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
-    var currentVC: UIViewController
+    var currentVC: UIViewController{
+        didSet{
+            guard let index = pages.firstIndex(of: currentVC) else {return}
+            nextButton.isHidden = index == pages.count - 1 // hide if on last page
+            backButton.isHidden = index == 0
+            doneButton.isHidden = !(index == pages.count - 1) // show if on last page
+        }
+    }
+    
     let closeButton = UIButton(type: .system)
+    let doneButton = UIButton(type: .system)
+    let nextButton = UIButton(type: .system)
+    let backButton = UIButton(type: .system)
     
     weak var delegate: OnboardingContainerViewControllerDelegate?
     
@@ -78,8 +89,43 @@ class OnboardingContainerViewController: UIViewController{
         closeButton.setTitle("Close", for: [])
         closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
         view.addSubview(closeButton)
+        
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.setTitle("Next", for: [])
+        nextButton.addTarget(self, action: #selector(nextTapped), for: .primaryActionTriggered)
+        view.addSubview(nextButton)
+        
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.setTitle("Back", for: [])
+        backButton.addTarget(self, action: #selector(backTapped), for: .primaryActionTriggered)
+        view.addSubview(backButton)
+        
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.setTitle("Done", for: [])
+        doneButton.addTarget(self, action: #selector(doneTapped), for: .primaryActionTriggered)
+        view.addSubview(doneButton)
     }
     private func layout(){
+        
+        //Next
+        NSLayoutConstraint.activate([
+            view.layoutMarginsGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: nextButton.bottomAnchor, multiplier: 6),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: nextButton.trailingAnchor, multiplier: 2)
+        ])
+        
+        //Back
+        NSLayoutConstraint.activate([
+            view.layoutMarginsGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: backButton.bottomAnchor, multiplier: 6),
+            backButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2)
+        ])
+        
+        //Done
+        NSLayoutConstraint.activate([
+            view.layoutMarginsGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: doneButton.bottomAnchor, multiplier: 6),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: doneButton.trailingAnchor, multiplier: 2)
+        ])
+        
+        //Close
         NSLayoutConstraint.activate([
             closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.layoutMarginsGuide.topAnchor, multiplier: 2)
@@ -124,5 +170,17 @@ extension OnboardingContainerViewController{
     @objc func closeTapped(_ sender: UIButton){
         delegate?.didFinishOnboarding()
     }
+    @objc func nextTapped(_ sender: UIButton){
+        guard let nextVC = getNextViewController(from: currentVC) else {return}
+        pageViewController.setViewControllers([nextVC], direction: .forward, animated: true)
+    }
+    @objc func backTapped(_ sender: UIButton){
+        guard let prevVC = getPreviousViewController(from: currentVC) else {return}
+        pageViewController.setViewControllers([prevVC], direction: .reverse, animated: true)
+    }
+    @objc func doneTapped(_ sender: UIButton){
+        delegate?.didFinishOnboarding()
+    }
+    
     
 }
