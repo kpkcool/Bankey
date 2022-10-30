@@ -7,12 +7,18 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject{
+    func didLogin()
+}
+
 class LoginViewController: UIViewController {
     
     let headingLabel = UILabel()
     let loginView = LoginView()
     let signInButton = UIButton(type: .system)
     let errorMessageLabel = UILabel()
+    
+    weak var delegate : LoginViewControllerDelegate?
     
     var username: String?{
         return loginView.usernameTextField.text
@@ -74,7 +80,7 @@ extension LoginViewController{
         //HeadingView
         NSLayoutConstraint.activate([
             headingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginView.topAnchor.constraint(equalToSystemSpacingBelow: headingLabel.bottomAnchor, multiplier: 10)
+            loginView.topAnchor.constraint(equalToSystemSpacingBelow: headingLabel.bottomAnchor, multiplier: 4)
         ])
         
         //LoginView
@@ -122,6 +128,7 @@ extension LoginViewController{
         if username == "Praveen" && password == "1234"{
             if #available(iOS 15.0, *) {
                 signInButton.configuration?.showsActivityIndicator = true
+                delegate?.didLogin()
             } else {
                 // Fallback on earlier versions
             }
