@@ -14,6 +14,7 @@
 		36EF107F290AD7EF000B0F7E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EF107E290AD7EF000B0F7E /* LoginView.swift */; };
 		36EF1082290CE2A4000B0F7E /* OnboardingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EF1081290CE2A4000B0F7E /* OnboardingContainerViewController.swift */; };
 		36EF1084290ED32D000B0F7E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EF1083290ED32D000B0F7E /* OnboardingViewController.swift */; };
+		36EF1086290F7AA1000B0F7E /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EF1085290F7AA1000B0F7E /* DummyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		36EF107E290AD7EF000B0F7E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		36EF1081290CE2A4000B0F7E /* OnboardingContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerViewController.swift; sourceTree = "<group>"; };
 		36EF1083290ED32D000B0F7E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		36EF1085290F7AA1000B0F7E /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			children = (
 				36EF106B290AD257000B0F7E /* LoginViewController.swift */,
 				36EF107E290AD7EF000B0F7E /* LoginView.swift */,
+				36EF1085290F7AA1000B0F7E /* DummyViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36EF107F290AD7EF000B0F7E /* LoginView.swift in Sources */,
+				36EF1086290F7AA1000B0F7E /* DummyViewController.swift in Sources */,
 				36EF106C290AD257000B0F7E /* LoginViewController.swift in Sources */,
 				36EF1084290ED32D000B0F7E /* OnboardingViewController.swift in Sources */,
 				36EF1068290AD257000B0F7E /* AppDelegate.swift in Sources */,

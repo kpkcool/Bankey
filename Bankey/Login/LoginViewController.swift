@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LogoutDelegate: AnyObject{
+    func didLogout()
+}
+
 protocol LoginViewControllerDelegate: AnyObject{
     func didLogin()
 }
@@ -33,6 +37,15 @@ class LoginViewController: UIViewController {
         
         style()
         layout()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if #available(iOS 15.0, *) {
+            signInButton.configuration?.showsActivityIndicator = false
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 
