@@ -10,36 +10,48 @@ import UIKit
 
 class AccountSummaryViewController: UIViewController {
     
-    let stackView = UIStackView()
-    let label = UILabel()
+    let names = ["Praveen", "Ankita", "Puchu"]
+    
+    var tableView = UITableView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        style()
-        layout()
+        setup()
     }
 }
 extension AccountSummaryViewController{
-    func style(){
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 20
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Welcome"
-        label.font = .preferredFont(forTextStyle: .title2)
-        
+    func setup(){
+        setupTableView()
     }
-    func layout(){
+    func setupTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        stackView.addArrangedSubview(label)
-        view.addSubview(stackView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+    }
+}
+extension AccountSummaryViewController : UITableViewDelegate, UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return names.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = names[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 }
