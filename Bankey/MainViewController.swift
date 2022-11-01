@@ -65,3 +65,4 @@ class MoreViewViewController: UIViewController{
         view.backgroundColor = .systemPurple
     }
 }
+
