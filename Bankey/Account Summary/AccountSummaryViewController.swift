@@ -10,8 +10,15 @@ import UIKit
 
 class AccountSummaryViewController: UIViewController {
     
-    let names = ["Praveen", "Ankita", "Puchu"]
+    struct Profile{
+        let firstName: String
+        let lastname: String
+    }
     
+    var profile: Profile?
+    var accounts: [AccountSummaryCell.ViewModel] = []
+    
+    var headerView = AccountSummaryHeaderView(frame: .zero)
     var tableView = UITableView()
     
     
@@ -24,6 +31,7 @@ extension AccountSummaryViewController{
     func setup(){
         setupTableView()
         setupTableHeaderView()
+        fetchData()
     }
     func setupTableView(){
         tableView.delegate = self
@@ -58,15 +66,44 @@ extension AccountSummaryViewController{
 extension AccountSummaryViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+        return accounts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard !accounts.isEmpty else { return UITableViewCell() }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: AccountSummaryCell.reuseID, for: indexPath) as! AccountSummaryCell
+        let account = accounts[indexPath.row]
+        cell.configure(with: account)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+}
+
+//MARK: - Networking
+extension AccountSummaryViewController{
+    private func fetchData(){
+        fetchAccounts()
+        fetchProfiles()
+    }
+    
+    private func fetchAccounts(){
+        let saving = AccountSummaryCell.ViewModel(accountType: .Banking, accountName: "Basic Savings", balance: 929466.23)
+        let visa = AccountSummaryCell.ViewModel(accountType: .CreditCard, accountName: "Visa Card", balance: 412.83)
+        let investment = AccountSummaryCell.ViewModel(accountType: .Investment, accountName: "Mutual Fund", balance: 12334.00)
+        
+        accounts.append(saving)
+        accounts.append(visa)
+        accounts.append(investment)
+    }
+    
+    private func fetchProfiles(){
+        
+    }
+    
 }
