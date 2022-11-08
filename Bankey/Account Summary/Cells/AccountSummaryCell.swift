@@ -9,6 +9,24 @@ import UIKit
 
 class AccountSummaryCell : UITableViewCell{
     
+    
+    enum AccountType: String{
+        case Banking
+        case CreditCard
+        case Investment
+    }
+    
+    struct ViewModel{
+        let accountType: AccountType
+        let accountName: String
+        let balance: Decimal
+        
+        var balanceAsArributedString: NSAttributedString{
+            return CurrencyFormatter().makeAttributedCurrency(balance)
+        }
+    }
+    
+    
     let typeLabel = UILabel()
     let underlineView = UIView()
     let nameLabel = UILabel()
@@ -60,7 +78,7 @@ extension AccountSummaryCell{
         balanceAmountLabel.translatesAutoresizingMaskIntoConstraints = false
         balanceAmountLabel.font = UIFont.preferredFont(forTextStyle: .body)
 //        balanceAmountLabel.text = "$929,466.63"
-        balanceAmountLabel.attributedText = makeFormattedBalance(dollars: "929,466", cents: "63")
+        balanceAmountLabel.attributedText = makeFormattedBalance(dollars: "XXX,XXX", cents: "XX")
         balanceAmountLabel.textAlignment = .right
         
         balanceStackView.addArrangedSubview(balanceLabel)
@@ -116,4 +134,29 @@ extension AccountSummaryCell{
         return rootString
     }
     
+}
+
+extension AccountSummaryCell {
+    
+    func configure(with vm: ViewModel){
+        
+        typeLabel.text = vm.accountType.rawValue
+        nameLabel.text = vm.accountName
+        balanceAmountLabel.attributedText = vm.balanceAsArributedString
+        
+        switch vm.accountType{
+        case .Banking:
+            underlineView.backgroundColor = appColor
+            balanceLabel.text = "Current balance"
+            break
+        case .CreditCard:
+            underlineView.backgroundColor = .systemOrange
+            balanceLabel.text = "Balance"
+            break
+        case .Investment:
+            underlineView.backgroundColor = .systemPurple
+            balanceLabel.text = "Value"
+            break
+        }
+    }
 }
