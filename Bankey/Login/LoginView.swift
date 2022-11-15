@@ -21,7 +21,6 @@ class LoginView: UIView{
         
         style()
         layout()
-        
     }
     
     required init(coder: NSCoder) {
@@ -66,7 +65,6 @@ extension LoginView{
         stackView.addArrangedSubview(dividerView)
         stackView.addArrangedSubview(passwordTextField)
         addSubview(stackView)
-        
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1), // 1 = 8pts, below topAnchor means loginView
