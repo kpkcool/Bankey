@@ -59,8 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().backgroundColor = appColor
     }
-    
-    
 }
 extension AppDelegate: LoginViewControllerDelegate{
     func didLogin() {
