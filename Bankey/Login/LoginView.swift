@@ -75,7 +75,6 @@ extension LoginView{
         ])
         
         dividerView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
     }
 }
 
