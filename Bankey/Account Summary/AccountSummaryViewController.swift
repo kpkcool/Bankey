@@ -73,7 +73,6 @@ extension AccountSummaryViewController{
         
         tableView.tableHeaderView = header
     }
-    
 }
 extension AccountSummaryViewController : UITableViewDelegate, UITableViewDataSource{
     
