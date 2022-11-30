@@ -56,7 +56,6 @@ struct CurrencyFormatter {
         if let result = formatter.string(from: dollars as NSNumber) {
             return result
         }
-        
         return ""
     }
     
